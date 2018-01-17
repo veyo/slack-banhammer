@@ -2,17 +2,17 @@
   "name": "slack-banhammer",
   "version": "1.0.0",
   "description": "Automatically kicks users that are not on a whitelist from certain Slack channels",
-  "main": "handler.js",
+  "main": "server.js",
   "keywords": [
     "azure",
-    "serverless",
     "slack"
   ],
   "dependencies": {
-    "axios": "^0.17.1"
+    "@slack/client": "^3.15.0",
+    "boom": "^7.1.1",
+    "hapi": "^17.2.0"
   },
   "devDependencies": {
-    "serverless-azure-functions": "*",
     "eslint": "^4.13.1",
     "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-plugin-import": "^2.8.0",

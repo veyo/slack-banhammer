@@ -30,13 +30,13 @@ This will create the necessary Azure resources to support the service and events
 With the service deployed, you can test it's functions using the following command:
 
 ```shell
-serverless invoke -f slackBanHammer
+serverless invoke -f onSlackMessage
 ```
 
 Additionally, if you'd like to view the logs that a function generates (either via the runtime, or create by the handler by calling `context.log`), you can simply run the following command:
 
 ```shell
-serverless logs -f slackBanHammer
+serverless logs -f onSlackMessage
 ```
 
 ### Cleaning up
