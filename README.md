@@ -1,54 +1,27 @@
 # slack-banhammer
 
-Automatically kicks users that are not on a whitelist from certain Slack channels. This service relies on the `serverless-azure-functions` plugin, and therefore, before you can deploy it, you simply need to run `npm install` in order to acquire it (this dependency is already saved in the `package.json` file).
+Automatically kicks users that are not on a whitelist from certain Slack channels.
 
-### Setting up the Azure credentials
+### Dependencies
+1. The latest Node.js LTS release (at the time of this document being written, 8.9.x). This app may work with other versions of node but has only been tested with the aforementioned release.
+1. Optionally, Visual Studio Code if you would like to take advantage of `launch.json`.
 
-Once the `serverless-azure-functions` plugin is installed, it expects to find the Azure credentials via a set of well-known environment variables. These will be used to actually authenticate with the Azure account, so that the Serverless CLI can generate the necessary Azure resources on the behalf when you request a deployment (see below).
+### Building / Running
+1. Run `npm install` to install all required libraries.
+1. Run `npm start` to start a local development server on port 3000.
 
-The following environment variables must be set, with their respective values:
-
-- *azureSubId* - ID of the Azure subscription you want to create the service within
-- *azureServicePrincipalTenantId* - ID of the tenant that the service principal was created within
-- *azureServicePrincipalClientId* - ID of the service principal you want to use to authenticate with Azure
-- *azureServicePrincipalPassword* - Password of the service principal you want to use to authenticate with Azure
-
-For details on how to create a service principal and/or acquire the Azure account's subscription/tenant ID, refer to the [Azure credentials](https://serverless.com/framework/docs/providers/azure/guide/credentials/) documentation.
+### Configuring the whitelist
+TODO
 
 ### Deploying the service
+TODO
 
-Once the Azure credentials are set, you can immediately deploy the service via the following command:
+### Pull requests
 
-```shell
-serverless deploy
-```
-
-This will create the necessary Azure resources to support the service and events that are defined in the `serverless.yml` file.
-
-### Invoking and inspecting a function
-
-With the service deployed, you can test it's functions using the following command:
-
-```shell
-serverless invoke -f onSlackMessage
-```
-
-Additionally, if you'd like to view the logs that a function generates (either via the runtime, or create by the handler by calling `context.log`), you can simply run the following command:
-
-```shell
-serverless logs -f onSlackMessage
-```
-
-### Cleaning up
-
-Once you're finished with the service, you can remove all of the generated Azure resources by simply running the following command:
-
-```shell
-serverless remove
-```
+If you would like to contribute, feel free to open a pull request: https://github.com/veyo/slack-banhammer/pulls. In your PR, please include an appropriate title which cleanly summarizes the change that you're making.
 
 ### Issues / Feedback / Feature Requests?
 
-If you have any issues, comments or want to see new features, please file an issue in the project repository:
+If you have any issues, comments or want to see new features, please file an issue:
 
-https://github.com/veyo/slack-banhammer
+https://github.com/veyo/slack-banhammer/issues
