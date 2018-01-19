@@ -20,7 +20,7 @@ const MONGODB_COLLECTION_NAME = process.env['MONGODB_COLLECTION_NAME']
 const slackClient = new SlackWebClient(SLACK_OAUTH_TOKEN)
 
 /**
- * Determines, given an event stating that a user joined a channel, if the user actually has permissions to be in that channel or not. If the user is not on the whitelist, this function calls @see kickUser() which removes them from the channel.
+ * Determines, given an event stating that a user joined a channel, if the user actually has permissions to be in that channel or not. If the user is not on the whitelist *and* the user is not a bot, this function calls @see kickUser() which removes them from the channel.
  * Note that the whitelist is defined using a dictionary ( @see whitelist ) with the following format:
  * {
  *  'name-of-channel-without-hash-prefix': ['username1', 'username2', 'usernamen'],
@@ -71,7 +71,7 @@ async function handleMemberJoinedChannelEvent (event) {
       throw Boom.internal('Slack\'s API returned a failure response')
     }
     const user = userResponse.user
-    const isUserBanned = channelWhitelist.indexOf(user.name) < 0
+    const isUserBanned = channelWhitelist.indexOf(user.name) < 0 && !user.is_bot
     console.log(user.name, isUserBanned ? 'is not' : 'is', 'allowed in', channel.name)
     if (isUserBanned) {
       await kickUser(user, channel, channelsClient, event)
