@@ -7,7 +7,7 @@ const MongoClient = require('mongodb').MongoClient
 // Create a server with a host and port
 const server = Hapi.server({
   host: 'localhost',
-  port: 3000
+  port: process.env['PORT'] || 3000
 })
 
 const SLACK_VERIFICATION_TOKEN = process.env['SLACK_VERIFICATION_TOKEN']
