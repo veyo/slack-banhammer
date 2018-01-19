@@ -50,6 +50,7 @@ For example, if a user named `username5` were to join `#some-other-channel` then
 ![slack-event-subscriptions](https://github.com/veyo/slack-banhammer/raw/master/slack-event-subscriptions.png "Slack Event Subscriptions")
 
 5. Deploy the app to the URL you defined in "Request URL" in Slack -> Event Subscriptions.
+6. Use the "Install App" menu to install the app to the workspace.
 
 ### Deploying the app
 Pretty much anything that supports Node 8.x will work including AWS Elastic Beanstalk, Azure App Service, Heroku, Zeit.co, etc.
