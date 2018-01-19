@@ -40,7 +40,7 @@ async function handleMemberJoinedChannelEvent (event) {
 
   const channelResponse = await channelsClient.info(event.channel)
   if (!channelResponse.ok) {
-    console.error(channelResponse)
+    console.error('Got an error response back from Slack: ', channelResponse)
     throw Boom.internal('Slack\'s API returned a failure response')
   }
 
@@ -51,12 +51,16 @@ async function handleMemberJoinedChannelEvent (event) {
     mongoConn = await MongoClient.connect(MONGODB_CONNECTION_STRING)
     whitelist = await mongoConn.db(MONGODB_DATABASE_NAME).collection(MONGODB_COLLECTION_NAME).findOne()
   } catch (err) {
-    console.log('Failed to connect to MongoDB: ', err)
+    console.error('Failed to connect to MongoDB: ', err)
     throw err
   } finally {
     if (mongoConn) {
       mongoConn.close()
     }
+  }
+
+  if (!whitelist) {
+    throw Boom.internal('Got an empty whitelist back from MongoDB')
   }
 
   if (whitelist.hasOwnProperty(channel.name)) {
