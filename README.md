@@ -43,11 +43,11 @@ For example, if a user named `username5` were to join `#some-other-channel` then
 3. Log in as the user, i.e. `veyo-ban-hammer`
 4. Create a new Slack App with the following settings:
 
-![slack-banhammer](https://github.com/veyo/slack-banhammer/raw/master/slack-verification-token.png "Slack Verification Token Settings")
+![slack-verification-token-settings](https://github.com/veyo/slack-banhammer/raw/master/slack-verification-token.png "Slack Verification Token Settings")
 
-![slack-banhammer](https://github.com/veyo/slack-banhammer/raw/master/slack-oauth.png "Slack OAuth Settings")
+![slack-oauth-settings](https://github.com/veyo/slack-banhammer/raw/master/slack-oauth.png "Slack OAuth Settings")
 
-![slack-banhammer](https://github.com/veyo/slack-banhammer/raw/master/slack-event-subscriptions.png "Slack Event Subscriptions")
+![slack-event-subscriptions](https://github.com/veyo/slack-banhammer/raw/master/slack-event-subscriptions.png "Slack Event Subscriptions")
 
 5. Deploy the app to the URL you defined in "Request URL" in Slack -> Event Subscriptions.
 
