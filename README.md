@@ -1,8 +1,8 @@
 # slack-banhammer
+Automatically kicks users that are not on a whitelist from certain Slack channels, like so:
 
 ![slack-banhammer](https://github.com/veyo/slack-banhammer/raw/master/slack-banhammer.png "An example of the message you see when someone gets banned from a channel")
-
-Automatically kicks users that are not on a whitelist from certain Slack channels.
+___
 
 ### Dependencies
 1. The latest Node.js LTS release (at the time of this document being written, 8.9.x). This app only works with versions of `node >= 8` because `async`/`await` is used and those JS language features are not available in earlier versions of node.
