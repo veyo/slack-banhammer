@@ -1,4 +1,4 @@
-# slack-banhammer
+# slack-banhammer :hammer: :boom: 
 Automatically kicks users that are not on a whitelist from certain Slack channels, like so:
 
 ![slack-banhammer](https://github.com/veyo/slack-banhammer/raw/master/slack-banhammer.png "An example of the message you see when someone gets banned from a channel")
