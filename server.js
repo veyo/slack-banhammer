@@ -2,6 +2,7 @@
 const Hapi = require('hapi')
 const Boom = require('boom')
 const SlackWebClient = require('@slack/client').WebClient
+const MongoClient = require('mongodb').MongoClient
 
 // Create a server with a host and port
 const server = Hapi.server({
@@ -9,13 +10,11 @@ const server = Hapi.server({
   port: 3000
 })
 
-// TODO: move to a document DB, add docs
-let whitelist = {
-  'whitelist-testing': []
-}
-
 const SLACK_VERIFICATION_TOKEN = process.env['SLACK_VERIFICATION_TOKEN']
 const SLACK_OAUTH_TOKEN = process.env['SLACK_OAUTH_TOKEN']
+const MONGODB_CONNECTION_STRING = process.env['MONGODB_CONNECTION_STRING']
+const MONGODB_DATABASE_NAME = process.env['MONGODB_DATABASE_NAME']
+const MONGODB_COLLECTION_NAME = process.env['MONGODB_COLLECTION_NAME']
 
 // Set up the Slack web client with our access token
 const slackClient = new SlackWebClient(SLACK_OAUTH_TOKEN)
@@ -46,6 +45,20 @@ async function handleMemberJoinedChannelEvent (event) {
   }
 
   const channel = channelResponse.channel
+  let mongoConn = null
+  let whitelist = null
+  try {
+    mongoConn = await MongoClient.connect(MONGODB_CONNECTION_STRING)
+    whitelist = await mongoConn.db(MONGODB_DATABASE_NAME).collection(MONGODB_COLLECTION_NAME).findOne()
+  } catch (err) {
+    console.log('Failed to connect to MongoDB: ', err)
+    throw err
+  } finally {
+    if (mongoConn) {
+      mongoConn.close()
+    }
+  }
+
   if (whitelist.hasOwnProperty(channel.name)) {
     const channelWhitelist = whitelist[channel.name]
     const userResponse = await slackClient.users.info(event.user)
@@ -91,6 +104,18 @@ function validateTokens () {
 
   if (!SLACK_OAUTH_TOKEN) {
     throw new Error('FATAL: SLACK_OAUTH_TOKEN was not defined')
+  }
+
+  if (!MONGODB_CONNECTION_STRING) {
+    throw new Error('FATAL: MONGODB_CONNECTION_STRING was not defined')
+  }
+
+  if (!MONGODB_DATABASE_NAME) {
+    throw new Error('FATAL: MONGODB_DATABASE_NAME was not defined')
+  }
+
+  if (!MONGODB_COLLECTION_NAME) {
+    throw new Error('FATAL: MONGODB_COLLECTION_NAME was not defined')
   }
 }
 
