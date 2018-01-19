@@ -44,7 +44,7 @@ async function handleMemberJoinedChannelEvent (event) {
     throw Boom.internal('Slack\'s API returned a failure response')
   }
 
-  const channel = channelResponse.channel
+  const channel = channelResponse[isPrivateChannel ? 'group' : 'channel']
   let mongoConn = null
   let whitelist = null
   try {
