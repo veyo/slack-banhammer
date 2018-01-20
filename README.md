@@ -29,7 +29,7 @@ See "Configuring the Slack App" to figure out where to find the `SLACK_` values 
 Since this service fetches the whitelist from MongoDB, you'll need to connect to your MongoDB instance (i.e. using `MONGODB_CONNECTION_STRING`) when you want to update the whitelist. The app expects the collection defined by the environment variable `MONGODB_COLLECTION_NAME` to have exactly one document which is the whitelist. Said document has the following format:
 ```json
 {
-  "name-of-channel-without-hash-prefix": ["username1", "username2", "usernamen"],
+  "name-of-channel-without-hash-prefix": ["username1", "username2", "username_n"],
   "some-other-channel": ["username4"]
 }
 ```
